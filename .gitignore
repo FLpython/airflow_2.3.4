@@ -1,0 +1,7 @@
+/.dags
+/airflow
+/.idea
+/my_dag_db.py
+/.env
+/plugins/
+/logs/
