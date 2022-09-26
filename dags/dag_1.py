@@ -4,7 +4,6 @@ from airflow.operators.postgres_operator import PostgresOperator
 from sql_statements import sql_dict
 from airflow.operators.trigger_dagrun import TriggerDagRunOperator
 
-
 with DAG(
         dag_id='1_insert_values',
         # default_args=default_args,
@@ -18,9 +17,12 @@ with DAG(
         task_id='trigger_dag2',
         trigger_dag_id='2_create_table',
         reset_dag_run=True,
-        wait_for_completion=True
+        wait_for_completion=True,
+        poke_interval=30
     )
 
     task1 = PostgresOperator(
         task_id='insert_values', postgres_conn_id='my_db', autocommit=True,
         sql=sql_dict['insert_values'])
+
+    trigger_target >> task1
