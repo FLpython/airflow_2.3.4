@@ -16,7 +16,7 @@ with DAG(
 ) as dag:
     trigger_target = TriggerDagRunOperator(
         task_id='trigger_dag2',
-        trigger_dag_id='2_select_values',
+        trigger_dag_id='2_create_table',
         reset_dag_run=True,
         wait_for_completion=True
     )
